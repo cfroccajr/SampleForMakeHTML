@@ -19,10 +19,20 @@
 \input{tex/acc_header}
 \usepackage{unicode-math}
 
+
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{test.bib}
+
+\ifdefined\HCode
+  % Make \tagpdfsetup do nothing when building for HTML
+  \newcommand{\tagpdfsetup}[1]{}
+\fi
+
+
 % Other Document Information
 
-    \title{Sample Document}
-    \author{Author Name}
+    \title{Creating Accessible and Convertable Documents in \LaTeX}
+    \author{Chuck Rocca}
 
 
 \begin{document}
@@ -30,6 +40,19 @@
 \maketitle
 
 \section{Opening}
+
+In this document I will be testting various potential issues with creating accessible and convertable to html by way of make4ht.  I have spent some time working with feedback from Googles Gemini working through the potential issues.  In particular make4ht is not compatable with \verb|\DocumentMetadata{options}|; Gemini made a number of helpful suggestions on fixing this in particular the use of \verb|\ifdefined\HCode|.  There are also some potential issues with make4ht and biber; it gave me the smaple code that I am using here. \cite{test-key}  To complie the bibliography properly you need to follow the following steps:
+\begin{enumerate}
+    \item \Verb|lualatex --shell-escape main.tex|
+    \item \Verb|biber main| 
+    \item \Verb|lualatex --shell-escape main.tex|
+    \item \Verb|lualatex --shell-escape main.tex|
+    \item \Verb|latexmk -C main.tex|
+    \item \Verb|make4ht --lua --shell-escape -c myconfig.cfg -B build_files -d html_output main.tex "mathjax,html5"|\footnote{This was developed over the course of a day conversing with the AI.  In particular it contributed the configuration file.}
+\end{enumerate}
+Note that in the above description I didn't use the minted package to type set the code.  It seems to have issues with both make4ht and with creating accessible documents.  The tagged pdf project reccomends the fancy verbatim package, \Verb|fancyvrb|, I haven't played with this yet.
+
+In the upcoming sections I will be checking to see which features are compatible with both the \LaTeX\/ tagged pdf project and with make4ht.  I have had issues with large projects.  I suspect this is due to the size, but I hope that by making the project progressively more complicted I can spot issues as they arise.
 
 \section{Equations}
 
@@ -51,12 +74,21 @@
 \section{Tables}
 
 \begin{table}[hpbt]
+    \tagpdfsetup{table/header-rows={1}}
 	\begin{tabular}{ccc}
 		col 1 & col 2 & col 3\\
 		a & b & c\\
-		d & e & f\\
+		d & e & f
 	\end{tabular}
 	\caption{test}
 \end{table}
+
+\section{Images}
+
+    \begin{figure}[hpbt]
+        \includegraphics[alt={duck with jacket and ball cap},width=0.5\linewidth]{images/Chuck_Duck.png}
+    \end{figure}
+
+\printbibliography
 
 \end{document}
