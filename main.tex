@@ -1,0 +1,62 @@
+\ifdefined\HCode
+  % Simple metadata for HTML to prevent infinite loops
+  % \DocumentMetadata{} 
+\else
+    \DocumentMetadata{
+      lang        = en-US,
+      testphase={phase-III,table,math,firstaid},
+      tagging-setup={math/setup={mathml-SE,mathml-AF}},
+      tagging=on,
+      pdfversion=2.0,
+      pdfstandard = ua-2,
+      pdfstandard = a-4f, %or a-4
+      uncompress,
+    }
+    \AddToDocumentProperties[hyperref]{pdftitle}{My other Story}
+    \AddToDocumentProperties[hyperref]{pdfauthor}{Someone}
+\fi
+\documentclass[12pt,twoside]{article}
+\input{tex/acc_header}
+\usepackage{unicode-math}
+
+% Other Document Information
+
+    \title{Sample Document}
+    \author{Author Name}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Opening}
+
+\section{Equations}
+
+\(x^2+3x+1\)
+
+\[x^2+3x+1\]
+
+\begin{align}
+	x^2+3x+1 &= ...\\
+	 & = ...
+\end{align}
+
+\begin{itemize}
+    \item \(\vec{u}=\langle 2,6,1 \rangle\)
+    \item \(\vec{v}=\langle 3,-1,0 \rangle\)
+    \item \(\vec{w}=\langle 0,0,1\rangle\)
+\end{itemize}
+
+\section{Tables}
+
+\begin{table}[hpbt]
+	\begin{tabular}{ccc}
+		col 1 & col 2 & col 3\\
+		a & b & c\\
+		d & e & f\\
+	\end{tabular}
+	\caption{test}
+\end{table}
+
+\end{document}
