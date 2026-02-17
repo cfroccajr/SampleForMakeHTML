@@ -41,7 +41,7 @@
 
 \section{Opening}
 
-In this document I will be testting various potential issues with creating accessible and convertable to html by way of make4ht.  I have spent some time working with feedback from Googles Gemini working through the potential issues.  In particular make4ht is not compatable with \verb|\DocumentMetadata{options}|; Gemini made a number of helpful suggestions on fixing this in particular the use of \verb|\ifdefined\HCode|.  There are also some potential issues with make4ht and biber; it gave me the smaple code that I am using here. \cite{test-key}  To complie the bibliography properly you need to follow the following steps:
+In this document I will be testing various potential issues with creating accessible and convertible to html by way of make4ht.  I have spent some time working with feedback from Googles Gemini working through the potential issues.  In particular make4ht is not compatible with \verb|\DocumentMetadata{options}|; Gemini made a number of helpful suggestions on fixing this in particular the use of \verb|\ifdefined\HCode|.  There are also some potential issues with make4ht and biber; it gave me the sample code that I am using here. \cite{test-key}  To compile the bibliography properly you need to follow the following steps:
 \begin{enumerate}
     \item \Verb|lualatex --shell-escape main.tex|
     \item \Verb|biber main| 
